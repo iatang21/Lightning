@@ -1,7 +1,7 @@
 void setup()
 {
   size(300,300);
-  strokeWeight(5);
+  strokeWeight(3);
   background(12,12,12);
 }
 
@@ -13,7 +13,7 @@ int endY = 0;
 
 void draw()
 {
-	fill(0,0,0,15);
+	fill(0,0,0,10);
 	rect(0,0,300,300);
 
 	while (endY<300) {
