@@ -4,17 +4,30 @@ void setup()
   strokeWeight(3);
   background(12,12,12);
   smooth();
+  for (int i = 0; i < drops.length; i++) {
+
+    drops[i] = new Rain(); // Create each object
+    r1 = new Rain();
+  }
 }
+
+Rain r1;
+
+int numDrops = 50;
+Rain[] drops = new Rain[numDrops];
 
 int startX = 150;
 int startY = 0;
 int endX = 150;
 int endY = 0;
 int rainY = 50;
+int rain2Y = 50;
+int rain3Y = 50;
+int rain4Y = 50;
 
 void draw()
 {
-	fill(12,12,12,10);
+	fill(0,0,0,10);
 	rect(0,0,300,300);
 
 	while (endY<300) {
@@ -27,34 +40,50 @@ void draw()
 		
 	}
 
-	int cloudX = 0;
-	while (cloudX<350){
-		noStroke();
-		fill(100);
-		ellipse(cloudX,15,120,90);
-		cloudX = cloudX + 80;
+	noStroke();
+	for (int i = 0; i < drops.length; i++) {
+    drops[i].fall();
 	}
-
-//add rain?
-		noStroke();
-		fill(0,30,255);
-		rect(10,rainY,1,5);
-		rect(30,rainY + 10,1,5);
-		rect(50,rainY + 30,1,5);
-		rect(70,rainY + 50,1,5);
-		rect(90,rainY + 30,1,5);
-		rainY = rainY + 5;
-		if (rainY>500) {
-			rainY = 50;
+	
+	int cloudX = 0;
+		while (cloudX<350){
+			noStroke();
+			fill(100);
+			ellipse(cloudX,15,120,90);
+			cloudX = cloudX + 80;
 		}
 
+
 }
+
+
+
+
+
 void mousePressed()
-{
-	startX = 150;
+{	int randSX = (int)(Math.random()*201)+50;
+	startX = randSX;
 	startY = 0;
-	endX = 150;
+	endX = randSX;
 	endY = 0;
 	
 }
 
+
+class Rain {
+  float r = random(300);
+  float y = random(-height);
+
+  void fall() {
+
+    y = y + 5;
+    fill(0,10,200,180);
+    rect(r, y, 3, 7);
+
+   if(y>height){
+   r = random(300);
+   y = random(-100);
+   }
+
+  }
+}
